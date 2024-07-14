@@ -33,6 +33,7 @@ function applyChanges() {
 
 document.addEventListener('DOMContentLoaded', function() {
     startTimer();
+    setupFullScreen();
 });
 
 function startTimer() {
