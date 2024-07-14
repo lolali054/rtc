@@ -78,3 +78,38 @@ function formatTime(seconds) {
 function padZero(value) {
     return value < 10 ? `0${value}` : value;
 }
+
+
+// Function to request fullscreen
+function requestFullscreen(element) {
+    if (element.requestFullscreen) {
+        element.requestFullscreen();
+    } else if (element.webkitRequestFullscreen) { /* Safari */
+        element.webkitRequestFullscreen();
+    } else if (element.msRequestFullscreen) { /* IE11 */
+        element.msRequestFullscreen();
+    }
+}
+
+// Function to exit fullscreen
+function exitFullscreen() {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) { /* Safari */
+        document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) { /* IE11 */
+        document.msExitFullscreen();
+    }
+}
+
+// Event listener for full-screen button
+document.getElementById('fullscreen-btn').addEventListener('click', function() {
+    var container = document.querySelector('.iphone-container');
+    if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
+        requestFullscreen(container); // Go fullscreen
+    } else {
+        exitFullscreen(); // Exit fullscreen
+    }
+});
+
+
