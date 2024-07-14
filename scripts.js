@@ -1,3 +1,13 @@
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        }, function(error) {
+            console.log('ServiceWorker registration failed: ', error);
+        });
+    });
+}
+
 document.getElementById('edit-form').addEventListener('submit', function(event) {
     event.preventDefault();
     applyChanges();
@@ -30,7 +40,6 @@ function applyChanges() {
     document.getElementById('bottom-box-time-text').textContent = bottomBoxTime;
 }
 
-
 document.addEventListener('DOMContentLoaded', function() {
     startTimer();
 });
@@ -55,31 +64,30 @@ function padZero(value) {
     return value < 10 ? `0${value}` : value;
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    startTimer();
-});
+// Function to display error message
+function displayErrorMessage(message) {
+    const container = document.querySelector('.iphone-container');
+    let errorMessageElement = document.getElementById('fullscreen-error-message');
 
-function startTimer() {
-    let seconds = 0;
-    const timerElement = document.querySelector('.timer');
+    if (!errorMessageElement) {
+        errorMessageElement = document.createElement('div');
+        errorMessageElement.id = 'fullscreen-error-message';
+        errorMessageElement.style.position = 'absolute';
+        errorMessageElement.style.top = '50%';
+        errorMessageElement.style.left = '50%';
+        errorMessageElement.style.transform = 'translate(-50%, -50%)';
+        errorMessageElement.style.backgroundColor = 'rgba(255, 0, 0, 0.8)';
+        errorMessageElement.style.color = '#fff';
+        errorMessageElement.style.padding = '10px';
+        errorMessageElement.style.borderRadius = '5px';
+        errorMessageElement.style.zIndex = '1000';
+        container.appendChild(errorMessageElement);
+    }
 
-    setInterval(function() {
-        seconds++;
-        timerElement.textContent = formatTime(seconds);
-    }, 1000);
+    errorMessageElement.textContent = message;
 }
 
-function formatTime(seconds) {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${padZero(minutes)}:${padZero(remainingSeconds)}`;
-}
-
-function padZero(value) {
-    return value < 10 ? `0${value}` : value;
-}
-
-
+// Function to simulate fullscreen using CSS
 function simulateFullscreen(element) {
     element.classList.add('fullscreen-simulated');
 }
