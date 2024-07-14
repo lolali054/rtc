@@ -37,7 +37,8 @@ body, html {
 .iphone-container {
     width: 390px; /* iPhone 15 Plus width */
     height: 844px; /* iPhone 15 Plus height */
-    background-color: #0033a0;
+    background-image: url('test.png'); /* Add the path to your background image */
+    background-size: cover; 
     position: relative; /* Change to relative */
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
