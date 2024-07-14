@@ -213,6 +213,10 @@ p {
     margin-top: -60px;
     margin-left: 270px;
 }
+.fullscreen-btn {
+   color: red;
+
+}
 
 .loading-bar {
     width: 350px;
