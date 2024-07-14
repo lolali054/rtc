@@ -80,6 +80,7 @@ function padZero(value) {
 }
 
 
+// Function to request fullscreen
 function requestFullscreen(element) {
     if (element.requestFullscreen) {
         element.requestFullscreen();
@@ -110,5 +111,6 @@ document.getElementById('fullscreen-btn').addEventListener('click', function() {
         exitFullscreen(); // Exit fullscreen
     }
 });
+
 
 
