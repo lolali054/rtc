@@ -14,6 +14,8 @@ body, html {
 .controls-container {
     width: 300px;
     padding: 20px;
+    background-image: url('test.png'); /* Add the path to your background image */
+    background-size: cover; 
     border-radius: 10px;
     margin-right: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -163,7 +165,7 @@ p {
 }
 
 .date-part {
-    font-size: 1.1em;
+    font-size: 1.2em;
     font-weight: 900;
     margin-top: -5px; /* Adjusted top margin for date parts */
     display: inline-block; /* Ensures they are inline and have margins */
@@ -171,11 +173,11 @@ p {
 }
 
 .date-part2 {
-    font-size: 1.1em;
+    font-size: 1.2em;
     font-weight: 900;
     margin-top: -5px; /* Adjusted top margin for date parts */
     display: inline-block; /* Ensures they are inline and have margins */
-    margin-right: 10px; /* Adjusted right margin for spacing between date parts */
+    margin-right: -10px; /* Adjusted right margin for spacing between date parts */
 }
 
 .date {
@@ -202,7 +204,7 @@ p {
     font-size: 1em;
     font-weight: 700;
     margin-top: -8px;
-    margin-right: 200px;
+    margin-right: 300px;
      /* Adjust as needed */
 }
 
@@ -317,21 +319,21 @@ p {
 
     .start-time {
         font-size: 1em;
-        font-weight: 700;
+        font-weight: 900;
         margin-top: -8px;
-        margin-right: 260px;
+        margin-right: 268px;
          /* Adjust as needed */
     }
 
     .end-time {
         font-size: 1em;
-        font-weight: 700;
+        font-weight: 900;
         margin-top: -23px;
         margin-right: -200px; /* Adjust as needed */
     }
 
     .date-part2 {
-        font-size: 1.1em;
+        font-size: 1.4em;
         font-weight: 900;
         margin-top: -5px; /* Adjusted top margin for date parts */
         /* Ensures they are inline and have margins */
@@ -339,12 +341,23 @@ p {
         left: 50px;
     }
 
-    .date-part {
+    .date {
+        font-size: 1.5em;
+        font-weight: 900;
+        
+    }
+    .time {
+
         font-size: 1.1em;
+        font-weight: 900;
+    }
+
+    .date-part {
+        font-size: 1.4em;
         font-weight: 900;
         margin-top: -5px; /* Adjusted top margin for date parts */
         display: inline-block; /* Ensures they are inline and have margins */
-        margin-right: 140.2px; /* Adjusted right margin for spacing between date parts */
+        margin-right: 100.2px; /* Adjusted right margin for spacing between date parts */
     }
 
     .controls-container div {
