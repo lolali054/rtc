@@ -8,6 +8,8 @@ if ('serviceWorker' in navigator) {
     });
 }
 
+
+
 document.getElementById('edit-form').addEventListener('submit', function(event) {
     event.preventDefault();
     applyChanges();
