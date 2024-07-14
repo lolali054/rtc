@@ -80,35 +80,39 @@ function padZero(value) {
 }
 
 
-// Function to request fullscreen
-function requestFullscreen(element) {
-    if (element.requestFullscreen) {
-        element.requestFullscreen();
-    } else if (element.webkitRequestFullscreen) { /* Safari */
-        element.webkitRequestFullscreen();
-    } else if (element.msRequestFullscreen) { /* IE11 */
-        element.msRequestFullscreen();
+function setupFullScreen() {
+    const fullScreenButton = document.getElementById('fullscreen-bnt');
+    if (fullScreenButton) {
+        fullScreenButton.addEventListener('click', toggleFullScreen);
     }
 }
 
-// Function to exit fullscreen
-function exitFullscreen() {
-    if (document.exitFullscreen) {
-        document.exitFullscreen();
-    } else if (document.webkitExitFullscreen) { /* Safari */
-        document.webkitExitFullscreen();
-    } else if (document.msExitFullscreen) { /* IE11 */
-        document.msExitFullscreen();
-    }
-}
+function toggleFullScreen() {
+    const iphoneContainer = document.querySelector('.iphone-container');
 
-// Event listener for full-screen button
-document.getElementById('fullscreen-btn').addEventListener('click', function() {
-    var container = document.querySelector('.iphone-container');
-    if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
-        requestFullscreen(container); // Go fullscreen
+    if (!document.fullscreenElement) {
+        iphoneContainer.requestFullscreen().catch(err => {
+            alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+        });
     } else {
-        exitFullscreen(); // Exit fullscreen
+        document.exitFullscreen();
+    }
+}
+
+// Adjust styles when entering or exiting full screen
+document.addEventListener('fullscreenchange', () => {
+    const iphoneContainer = document.querySelector('.iphone-container');
+
+    if (document.fullscreenElement) {
+        // Adjust styles for full screen
+        iphoneContainer.style.width = '100vw';
+        iphoneContainer.style.height = '100vh';
+        iphoneContainer.style.borderRadius = '0';
+    } else {
+        // Reset styles when exiting full screen
+        iphoneContainer.style.width = '390px'; // Adjust as needed
+        iphoneContainer.style.height = '844px'; // Adjust as needed
+        iphoneContainer.style.borderRadius = '30px'; // Adjust as needed
     }
 });
 
