@@ -68,6 +68,14 @@ body, html {
     object-fit: cover; /* Ensure the image covers the circle properly */
 }
 
+.man {
+    
+    margin-top: -100px;
+    position: absolute;
+    
+    position: static;
+}
+
 .circle {
     width: 52px;
     height: 52px;
@@ -222,7 +230,7 @@ p {
     background-color: #000;
     border-radius: 5px;
     overflow: hidden;
-    margin-top: 57px;
+    margin-top: 35px;
     margin-left: -18px;
 }
 
