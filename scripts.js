@@ -81,7 +81,7 @@ function padZero(value) {
 
 
 function setupFullScreen() {
-    const fullScreenButton = document.getElementById('fullscreen-bnt');
+    const fullScreenButton = document.getElementById('fullscreen-btn');
     if (fullScreenButton) {
         fullScreenButton.addEventListener('click', toggleFullScreen);
     }
