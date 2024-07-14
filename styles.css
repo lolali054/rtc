@@ -36,11 +36,12 @@ body, html {
 
 .iphone-container {
     width: 390px; /* iPhone 15 Plus width */
-    height: 844px; /* iPhone 15 Plus height */
+    height: 932px; /* iPhone 15 Plus height */
     background-color: #0033a0;
-    position: relative; /* Change to relative */
+    position: relative;
     border-radius: 30px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    margin: auto;
 }
 
 .profile {
