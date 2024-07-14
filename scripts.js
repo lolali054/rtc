@@ -80,35 +80,35 @@ function padZero(value) {
 }
 
 
-// Function to toggle full screen
-function toggleFullScreen() {
-    const iphoneContainer = document.querySelector('.iphone-container');
-
-    if (!document.fullscreenElement) {
-        iphoneContainer.requestFullscreen().catch(err => {
-            alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
-        });
-    } else {
-        document.exitFullscreen();
+function requestFullscreen(element) {
+    if (element.requestFullscreen) {
+        element.requestFullscreen();
+    } else if (element.webkitRequestFullscreen) { /* Safari */
+        element.webkitRequestFullscreen();
+    } else if (element.msRequestFullscreen) { /* IE11 */
+        element.msRequestFullscreen();
     }
 }
 
-// Detect full screen change
-document.addEventListener('fullscreenchange', () => {
-    const iphoneContainer = document.querySelector('.iphone-container');
+// Function to exit fullscreen
+function exitFullscreen() {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) { /* Safari */
+        document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) { /* IE11 */
+        document.msExitFullscreen();
+    }
+}
 
-    if (document.fullscreenElement) {
-        // Adjust iPhone container styles for full screen
-        iphoneContainer.style.width = '100vw';
-        iphoneContainer.style.height = '100vh';
-        iphoneContainer.style.borderRadius = '0';
+// Event listener for full-screen button
+document.getElementById('fullscreen-btn').addEventListener('click', function() {
+    var container = document.querySelector('.iphone-container');
+    if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
+        requestFullscreen(container); // Go fullscreen
     } else {
-        // Reset iPhone container styles when exiting full screen
-        iphoneContainer.style.width = '390px';
-        iphoneContainer.style.height = '844px';
-        iphoneContainer.style.borderRadius = '30px';
+        exitFullscreen(); // Exit fullscreen
     }
 });
-
 
 
