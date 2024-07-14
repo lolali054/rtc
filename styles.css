@@ -70,10 +70,10 @@ body, html {
 
 .man {
     
-    margin-top: -100px;
+    margin-top: -45px;
     position: absolute;
     
-    position: static;
+    
 }
 
 .circle {
@@ -230,7 +230,7 @@ p {
     background-color: #000;
     border-radius: 5px;
     overflow: hidden;
-    margin-top: 35px;
+    margin-top: 55px;
     margin-left: -18px;
 }
 
