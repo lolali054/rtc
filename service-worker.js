@@ -1,12 +1,11 @@
 const CACHE_NAME = 'rtc-card-cache-v1';
 const urlsToCache = [
-    '/',
-    '/index.html',
-    '/styles.css',
-    '/scripts.js',
-    '/manifest.json',
-    '/rtc/unnamed.jpg',
-    '/rtc/unnamed.jpg'
+    'rtc/',
+    'rtc/index.html',
+    'rtc/styles.css',
+    'rtc/scripts.js',
+    'rtc/manifest.json',
+    'rtc/unnamed.jpg'
 ];
 
 self.addEventListener('install', event => {
