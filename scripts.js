@@ -29,35 +29,9 @@ function applyChanges() {
     document.getElementById('bottom-box-date-text').textContent = bottomBoxDate;
     document.getElementById('bottom-box-time-text').textContent = bottomBoxTime;
 }
-
-
 document.addEventListener('DOMContentLoaded', function() {
     startTimer();
-    setupFullScreen();
-});
-
-function startTimer() {
-    let seconds = 0;
-    const timerElement = document.querySelector('.timer');
-
-    setInterval(function() {
-        seconds++;
-        timerElement.textContent = formatTime(seconds);
-    }, 1000);
-}
-
-function formatTime(seconds) {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${padZero(minutes)}:${padZero(remainingSeconds)}`;
-}
-
-function padZero(value) {
-    return value < 10 ? `0${value}` : value;
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    startTimer();
+    setupFullScreen()
 });
 
 function startTimer() {
