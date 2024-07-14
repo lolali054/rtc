@@ -65,20 +65,34 @@ function setupFullScreen() {
 function toggleFullScreen() {
     const iphoneContainer = document.querySelector('.iphone-container');
 
-    if (!document.fullscreenElement) {
-        iphoneContainer.requestFullscreen().catch(err => {
-            alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
-        });
+    if (!isFullScreen()) {
+        if (iphoneContainer.requestFullscreen) {
+            iphoneContainer.requestFullscreen().catch(err => {
+                alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+            });
+        } else if (iphoneContainer.webkitRequestFullscreen) { // Safari fallback
+            iphoneContainer.webkitRequestFullscreen().catch(err => {
+                alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+            });
+        }
     } else {
-        document.exitFullscreen();
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) { // Safari fallback
+            document.webkitExitFullscreen();
+        }
     }
+}
+
+function isFullScreen() {
+    return !!(document.fullscreenElement || document.webkitFullscreenElement);
 }
 
 // Adjust styles when entering or exiting full screen
 document.addEventListener('fullscreenchange', () => {
     const iphoneContainer = document.querySelector('.iphone-container');
 
-    if (document.fullscreenElement) {
+    if (isFullScreen()) {
         // Adjust styles for full screen
         iphoneContainer.style.width = '100vw';
         iphoneContainer.style.height = '100vh';
