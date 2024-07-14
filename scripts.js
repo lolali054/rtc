@@ -29,9 +29,10 @@ function applyChanges() {
     document.getElementById('bottom-box-date-text').textContent = bottomBoxDate;
     document.getElementById('bottom-box-time-text').textContent = bottomBoxTime;
 }
+
+
 document.addEventListener('DOMContentLoaded', function() {
     startTimer();
-    setupFullScreen()
 });
 
 function startTimer() {
@@ -54,56 +55,77 @@ function padZero(value) {
     return value < 10 ? `0${value}` : value;
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    startTimer();
+});
 
-function setupFullScreen() {
-    const fullScreenButton = document.getElementById('fullscreen-btn');
-    if (fullScreenButton) {
-        fullScreenButton.addEventListener('click', toggleFullScreen);
+function startTimer() {
+    let seconds = 0;
+    const timerElement = document.querySelector('.timer');
+
+    setInterval(function() {
+        seconds++;
+        timerElement.textContent = formatTime(seconds);
+    }, 1000);
+}
+
+function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${padZero(minutes)}:${padZero(remainingSeconds)}`;
+}
+
+function padZero(value) {
+    return value < 10 ? `0${value}` : value;
+}
+
+function requestFullscreen(element) {
+    if (element.requestFullscreen) {
+        element.requestFullscreen();
+    } else if (element.webkitRequestFullscreen) { /* Safari */
+        element.webkitRequestFullscreen();
+    } else if (element.msRequestFullscreen) { /* IE11 */
+        element.msRequestFullscreen();
+    } else if (element.mozRequestFullScreen) { /* Firefox */
+        element.mozRequestFullScreen();
     }
 }
 
-function toggleFullScreen() {
-    const iphoneContainer = document.querySelector('.iphone-container');
-
-    if (!isFullScreen()) {
-        if (iphoneContainer.requestFullscreen) {
-            iphoneContainer.requestFullscreen().catch(err => {
-                alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
-            });
-        } else if (iphoneContainer.webkitRequestFullscreen) { // Safari fallback
-            iphoneContainer.webkitRequestFullscreen().catch(err => {
-                alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
-            });
-        }
-    } else {
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-        } else if (document.webkitExitFullscreen) { // Safari fallback
-            document.webkitExitFullscreen();
-        }
+// Function to exit fullscreen
+function exitFullscreen() {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) { /* Safari */
+        document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) { /* IE11 */
+        document.msExitFullscreen();
+    } else if (document.mozCancelFullScreen) { /* Firefox */
+        document.mozCancelFullScreen();
     }
 }
 
-function isFullScreen() {
-    return !!(document.fullscreenElement || document.webkitFullscreenElement);
-}
-
-// Adjust styles when entering or exiting full screen
-document.addEventListener('fullscreenchange', () => {
-    const iphoneContainer = document.querySelector('.iphone-container');
-
-    if (isFullScreen()) {
-        // Adjust styles for full screen
-        iphoneContainer.style.width = '100vw';
-        iphoneContainer.style.height = '100vh';
-        iphoneContainer.style.borderRadius = '0';
+// Event listener for full-screen button
+document.getElementById('fullscreen-btn').addEventListener('click', function() {
+    var container = document.querySelector('.iphone-container');
+    if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement && !document.mozFullScreenElement) {
+        requestFullscreen(container); // Go fullscreen
     } else {
-        // Reset styles when exiting full screen
-        iphoneContainer.style.width = '390px'; // Adjust as needed
-        iphoneContainer.style.height = '844px'; // Adjust as needed
-        iphoneContainer.style.borderRadius = '30px'; // Adjust as needed
+        exitFullscreen(); // Exit fullscreen
     }
 });
 
+// Ensure fullscreen changes are handled correctly
+document.addEventListener('fullscreenchange', onFullscreenChange);
+document.addEventListener('webkitfullscreenchange', onFullscreenChange);
+document.addEventListener('mozfullscreenchange', onFullscreenChange);
+document.addEventListener('MSFullscreenChange', onFullscreenChange);
 
+function onFullscreenChange() {
+    var fullscreenElement = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+    if (fullscreenElement) {
+        console.log('Entered fullscreen mode');
+    } else {
+        console.log('Exited fullscreen mode');
+    }
+}
 
