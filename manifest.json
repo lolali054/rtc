@@ -1,20 +1,20 @@
 {
-    "name": "RTC Card",
-    "short_name": "RTC",
-    "start_url": "/",
-    "display": "standalone",
-    "background_color": "#0033a0",
-    "theme_color": "#0033a0",
-    "icons": [
-      {
-        "src": "/icons/icon-192x192.png",
-        "sizes": "192x192",
-        "type": "image/png"
-      },
-      {
-        "src": "/icons/icon-512x512.png",
-        "sizes": "512x512",
-        "type": "image/png"
-      }
-    ]
-  }
+  "name": "RTC Card",
+  "short_name": "RTC",
+  "start_url": "/rtc/",
+  "display": "standalone",
+  "background_color": "#0033a0",
+  "theme_color": "#0033a0",
+  "icons": [
+    {
+      "src": "/rtc/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/rtc/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
