@@ -35,8 +35,8 @@ body, html {
 }
 
 .iphone-container {
-    width: 390px; /* iPhone 15 Plus width */
-    height: 932px; /* iPhone 15 Plus height */
+    width: 294px; /* iPhone 15 Plus width */
+    height: 608px; /* iPhone 15 Plus height */
     background-color: #0033a0;
     position: relative;
     border-radius: 30px;
@@ -244,8 +244,9 @@ p {
 
 @media (max-width: 430px) and (max-height: 932px) {
     .iphone-container {
-        width: 90%;
-        height: auto; /* Adjust as needed */
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
     }
 
     .profile {
@@ -343,3 +344,108 @@ p {
         bottom: 100px;
     }
 }
+
+@media (max-width: 294px) and (max-height: 608px) {
+    .iphone-container {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+
+    .profile {
+        width: 250px; /* Adjust as needed */
+        height: 250px; /* Adjust as needed */
+    }
+
+    .circle {
+        width: 60px; /* Adjust as needed */
+        height: 60px; /* Adjust as needed */
+    }
+
+    @keyframes rotate {
+        0% {
+            transform: rotate(0deg) translate(120px) rotate(0deg); /* Adjust translate distance as needed */
+        }
+        100% {
+            transform: rotate(360deg) translate(120px) rotate(-360deg);
+        }
+    }
+    
+
+    .info-box {
+        width: 90%; /* Adjust as needed */
+    }
+
+    .loading-bar {
+        width: 408px;
+        height: 10px;
+        background-color: #000;
+        border-radius: 5px;
+        overflow: hidden;
+        margin-top: 70px;
+        margin-left: -18px;
+    }
+    
+    .loading-bar .fill {
+        width: 0%;
+        height: 100%;
+        background-color: #1bb31b;
+        animation: fillAnimation 800s linear forwards;
+    }
+
+    
+    .top-box {
+        top: 607px; /* Adjust as needed */
+        left: 50%;
+        transform: translateX(-50%);
+        height: 75px;
+        width: 370px;
+    }
+    
+    .bottom-box {
+        top: 730px; /* Adjust as needed to position close to top-box */
+        left: 50%;
+        height: 75px;
+        width: 370px;
+        transform: translateX(-50%);
+    }
+
+    .start-time {
+        font-size: 1em;
+        font-weight: 700;
+        margin-top: -8px;
+        margin-right: 260px;
+         /* Adjust as needed */
+    }
+
+    .end-time {
+        font-size: 1em;
+        font-weight: 700;
+        margin-top: -23px;
+        margin-right: -240px; /* Adjust as needed */
+    }
+
+    .date-part2 {
+        font-size: 1.1em;
+        font-weight: 900;
+        margin-top: -5px; /* Adjusted top margin for date parts */
+        /* Ensures they are inline and have margins */
+        
+        left: 500px;
+    }
+
+    .date-part {
+        font-size: 1.1em;
+        font-weight: 900;
+        margin-top: -5px; /* Adjusted top margin for date parts */
+        display: inline-block; /* Ensures they are inline and have margins */
+        margin-right: 140.2px; /* Adjusted right margin for spacing between date parts */
+    }
+
+    .controls-container div {
+        margin-bottom: 10px;
+        bottom: 100px;
+    }
+}
+
+
