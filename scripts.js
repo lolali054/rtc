@@ -8,8 +8,6 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-
-
 document.getElementById('edit-form').addEventListener('submit', function(event) {
     event.preventDefault();
     applyChanges();
@@ -25,26 +23,63 @@ function applyChanges() {
     const bottomBoxDate = document.getElementById('bottom-box-date').value;
     const bottomBoxTime = document.getElementById('bottom-box-time').value;
 
-    // Update circle colors
-    document.querySelector('.blue').style.backgroundColor = blueColor;
-    document.querySelector('.pink').style.backgroundColor = pinkColor;
+    const data = {
+        blueCircleColor: blueColor,
+        pinkCircleColor: pinkColor,
+        startDate: startDate,
+        endDate: endDate,
+        topBoxTimeStart: startTime,
+        topBoxTimeEnd: endTime,
+        bottomBoxDate: bottomBoxDate,
+        bottomBoxTime: bottomBoxTime
+    };
 
-    // Update date parts
-    document.querySelector('.date-part').textContent = startDate;
-    document.querySelector('.date-part2').textContent = endDate;
+    // Save input values as JSON to local storage
+    localStorage.setItem('userData', JSON.stringify(data));
 
-    // Update time in top box
-    document.querySelector('.start-time').textContent = startTime;
-    document.querySelector('.end-time').textContent = endTime;
-
-    // Update bottom box date and time
-    document.getElementById('bottom-box-date-text').textContent = bottomBoxDate;
-    document.getElementById('bottom-box-time-text').textContent = bottomBoxTime;
+    updateUI(data); // Update the UI with the new values
 }
 
 document.addEventListener('DOMContentLoaded', function() {
     startTimer();
+    loadSavedInputValues();
 });
+
+function loadSavedInputValues() {
+    const savedData = localStorage.getItem('userData');
+    if (savedData) {
+        const data = JSON.parse(savedData);
+
+        document.getElementById('blue-circle-color').value = data.blueCircleColor;
+        document.getElementById('pink-circle-color').value = data.pinkCircleColor;
+        document.getElementById('start-date').value = data.startDate;
+        document.getElementById('end-date').value = data.endDate;
+        document.getElementById('top-box-time-start').value = data.topBoxTimeStart;
+        document.getElementById('top-box-time-end').value = data.topBoxTimeEnd;
+        document.getElementById('bottom-box-date').value = data.bottomBoxDate;
+        document.getElementById('bottom-box-time').value = data.bottomBoxTime;
+
+        updateUI(data); // Update the UI with the saved values
+    }
+}
+
+function updateUI(data) {
+    // Update circle colors
+    document.querySelector('.blue').style.backgroundColor = data.blueCircleColor;
+    document.querySelector('.pink').style.backgroundColor = data.pinkCircleColor;
+
+    // Update date parts
+    document.querySelector('.date-part').textContent = data.startDate;
+    document.querySelector('.date-part2').textContent = data.endDate;
+
+    // Update time in top box
+    document.querySelector('.start-time').textContent = data.topBoxTimeStart;
+    document.querySelector('.end-time').textContent = data.topBoxTimeEnd;
+
+    // Update bottom box date and time
+    document.getElementById('bottom-box-date-text').textContent = data.bottomBoxDate;
+    document.getElementById('bottom-box-time-text').textContent = data.bottomBoxTime;
+}
 
 function startTimer() {
     let seconds = 0;
@@ -66,7 +101,6 @@ function padZero(value) {
     return value < 10 ? `0${value}` : value;
 }
 
-// Function to display error message
 function displayErrorMessage(message) {
     const container = document.querySelector('.iphone-container');
     let errorMessageElement = document.getElementById('fullscreen-error-message');
@@ -89,17 +123,14 @@ function displayErrorMessage(message) {
     errorMessageElement.textContent = message;
 }
 
-// Function to simulate fullscreen using CSS
 function simulateFullscreen(element) {
     element.classList.add('fullscreen-simulated');
 }
 
-// Function to exit simulated fullscreen
 function exitSimulatedFullscreen(element) {
     element.classList.remove('fullscreen-simulated');
 }
 
-// Function to request fullscreen
 function requestFullscreen(element) {
     if (element.requestFullscreen) {
         element.requestFullscreen().catch(err => {
@@ -114,12 +145,10 @@ function requestFullscreen(element) {
             displayErrorMessage(`Error: ${err.message} (${err.name})`);
         });
     } else {
-        // Fallback for unsupported browsers
         simulateFullscreen(element);
     }
 }
 
-// Function to exit fullscreen
 function exitFullscreen(element) {
     if (document.exitFullscreen) {
         document.exitFullscreen().catch(err => {
@@ -134,22 +163,19 @@ function exitFullscreen(element) {
             displayErrorMessage(`Error: ${err.message} (${err.name})`);
         });
     } else {
-        // Fallback for unsupported browsers
         exitSimulatedFullscreen(element);
     }
 }
 
-// Event listener for full-screen button
 document.getElementById('fullscreen-btn').addEventListener('click', function() {
     var container = document.querySelector('.iphone-container');
     if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
-        requestFullscreen(container); // Go fullscreen
+        requestFullscreen(container);
     } else {
-        exitFullscreen(container); // Exit fullscreen
+        exitFullscreen(container);
     }
 });
 
-// Add event listeners to handle fullscreen change and errors
 document.addEventListener('fullscreenchange', function() {
     console.log('Fullscreen mode changed.');
 });
